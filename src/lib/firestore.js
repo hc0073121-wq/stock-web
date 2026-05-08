@@ -1,53 +1,57 @@
-import { db } from "./firebase";
-
 import {
+  getFirestore,
   collection,
   addDoc,
   getDocs,
-  query,
-  where,
+  deleteDoc,
+  updateDoc,
+  doc,
 } from "firebase/firestore";
 
-/*
-====================================
-주식 추가
-====================================
-*/
-export async function addStockToDB(data, uid) {
-  try {
-    await addDoc(collection(db, "stocks"), {
-      ...data,
-      uid,
-      createdAt: Date.now(),
-    });
+import { app } from "./auth";
 
-    return { success: true };
-  } catch (e) {
-    return { success: false, error: e.message };
-  }
-}
+const db = getFirestore(app);
 
-/*
-====================================
-주식 조회
-====================================
-*/
-export async function getStocksFromDB(uid) {
-  try {
-    const q = query(
-      collection(db, "stocks"),
-      where("uid", "==", uid)
-    );
+/* =========================================================
+   📥 전체 종목 가져오기
+   ========================================================= */
 
-    const snapshot = await getDocs(q);
+export const getStocksFromDB = async () => {
+  const snapshot = await getDocs(collection(db, "stocks"));
 
-    const data = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+  return snapshot.docs.map((d) => ({
+    id: d.id,
+    ...d.data(),
+  }));
+};
 
-    return { success: true, data };
-  } catch (e) {
-    return { success: false, error: e.message };
-  }
-}
+/* =========================================================
+   ➕ 종목 추가
+   ========================================================= */
+
+export const addStockToDB = async (data) => {
+  await addDoc(collection(db, "stocks"), data);
+};
+
+/* =========================================================
+   ✏️ 수정 (StockApp.jsx 요구)
+   ========================================================= */
+
+export const updateStockInDB = async (id, data) => {
+  const ref = doc(db, "stocks", id);
+  await updateDoc(ref, data);
+};
+
+/* =========================================================
+   🗑 삭제 (StockApp.jsx 요구)
+   ========================================================= */
+
+export const deleteStockFromDB = async (id) => {
+  await deleteDoc(doc(db, "stocks", id));
+};
+
+/* =========================================================
+   📤 export
+   ========================================================= */
+
+export { db };

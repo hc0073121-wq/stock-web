@@ -1,16 +1,14 @@
-
 import { initializeApp, getApps, getApp } from "firebase/app";
 import {
   getAuth,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  signOut
+  signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
 
 /* =========================================================
-   🔥 Firebase 설정 (.env 체크용)
+   🔥 Firebase 설정
    ========================================================= */
 
 const firebaseConfig = {
@@ -23,27 +21,40 @@ const firebaseConfig = {
 };
 
 /* =========================================================
-   🔍 DEBUG (🔥 여기 정확히 넣는 위치)
-   👉 Firebase 초기화 전에 무조건 확인
-   ========================================================= */
-
-console.log("🔥 FIREBASE CONFIG CHECK:", {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-});
-
-/* =========================================================
    🚨 Firebase 초기화 (중복 방지)
    ========================================================= */
 
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-
 const auth = getAuth(app);
-const db = getFirestore(app);
 
 /* =========================================================
-   👀 AUTH 상태 감지
+   🔐 로그인 (LoginForm.jsx용)
+   ========================================================= */
+
+export const loginUser = async (email, password) => {
+  const result = await signInWithEmailAndPassword(auth, email, password);
+  return result.user;
+};
+
+/* =========================================================
+   🆕 회원가입 (RegisterForm.jsx용)
+   ========================================================= */
+
+export const registerUser = async (email, password) => {
+  const result = await createUserWithEmailAndPassword(auth, email, password);
+  return result.user;
+};
+
+/* =========================================================
+   🚪 로그아웃
+   ========================================================= */
+
+export const logoutUser = async () => {
+  await signOut(auth);
+};
+
+/* =========================================================
+   👀 Auth 상태 감지
    ========================================================= */
 
 export const observeAuthState = (callback) => {
@@ -53,33 +64,7 @@ export const observeAuthState = (callback) => {
 };
 
 /* =========================================================
-   🔐 로그인
+   📤 export
    ========================================================= */
 
-export const login = async (email, password) => {
-  const result = await signInWithEmailAndPassword(auth, email, password);
-  return result.user;
-};
-
-/* =========================================================
-   🆕 회원가입
-   ========================================================= */
-
-export const register = async (email, password) => {
-  const result = await createUserWithEmailAndPassword(auth, email, password);
-  return result.user;
-};
-
-/* =========================================================
-   🚪 로그아웃
-   ========================================================= */
-
-export const logout = async () => {
-  await signOut(auth);
-};
-
-/* =========================================================
-   📦 export
-   ========================================================= */
-
-export { auth, db };
+export { app, auth };
