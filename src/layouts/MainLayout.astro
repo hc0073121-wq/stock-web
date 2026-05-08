@@ -1,0 +1,37 @@
+---
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Stock Manager</title>
+
+    <!-- 폰트 (UI 개선용 - 기존 구조 영향 없음) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- =====================================================
+         🌐 전체 앱 래퍼 (UI 안정화용)
+         ===================================================== -->
+    <div class="app-wrapper">
+
+      <!-- ===================================================
+           📦 실제 페이지 콘텐츠 삽입 영역
+           =================================================== -->
+      <main class="main-container">
+        <slot />
+      </main>
+
+    </div>
+  </body>
+</html>

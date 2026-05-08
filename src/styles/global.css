@@ -1,0 +1,245 @@
+
+/* =========================================================
+   🌐 TAILWIND 기본
+   ========================================================= */
+@import "tailwindcss";
+
+/* =========================================================
+   🧼 기본 리셋 (충돌 방지용)
+   ========================================================= */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #f3f4f6;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  color: #111827;
+}
+
+/* =========================================================
+   🔥 HEADER (핵심 UI)
+   ========================================================= */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 18px 24px;
+
+  background: #f8fafc;
+  border-bottom: 1px solid #e5e7eb;
+
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+/* 타이틀 */
+.header-title {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -1px;
+
+  color: #111827;
+}
+
+/* 오른쪽 영역 */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 유저 이메일 */
+.user-email {
+  font-size: 14px;
+  color: #6b7280;
+  margin-right: 8px;
+}
+
+/* =========================================================
+   🔘 버튼 공통 스타일
+   ========================================================= */
+.auth-btn {
+  padding: 8px 14px;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+/* 로그인 */
+.auth-btn.login {
+  background: #3b82f6;
+  color: white;
+}
+
+.auth-btn.login:hover {
+  background: #2563eb;
+}
+
+/* 회원가입 */
+.auth-btn.register {
+  background: #22c55e;
+  color: white;
+}
+
+.auth-btn.register:hover {
+  background: #16a34a;
+}
+
+/* 로그아웃 */
+.auth-btn.logout {
+  background: #ef4444;
+  color: white;
+}
+
+.auth-btn.logout:hover {
+  background: #dc2626;
+}
+
+/* =========================================================
+   📦 레이아웃 공통
+   ========================================================= */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 카드 UI */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* =========================================================
+   📊 STOCK LIST UI
+   ========================================================= */
+.stock-item {
+  background: white;
+  border-radius: 12px;
+  padding: 14px;
+
+  margin-bottom: 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  transition: 0.15s ease;
+}
+
+.stock-item:hover {
+  background: #f9fafb;
+}
+
+/* 수익률 */
+.profit-plus {
+  color: #ef4444;
+  font-weight: 700;
+}
+
+.profit-minus {
+  color: #3b82f6;
+  font-weight: 700;
+}
+
+/* =========================================================
+   🔍 INPUT / FORM
+   ========================================================= */
+input,
+select {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+
+  padding: 10px;
+
+  outline: none;
+  background: white;
+}
+
+input:focus,
+select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* =========================================================
+   💾 SAVE BUTTON (부드럽고 깔끔한 스타일)
+   ========================================================= */
+.btn-save {
+  background: #3b82f6;
+  color: white;
+
+  padding: 10px 16px;
+
+  border-radius: 14px;
+  border: none;
+
+  font-weight: 600;
+  font-size: 14px;
+
+  cursor: pointer;
+
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
+
+  transition: all 0.2s ease;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-save:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.25);
+}
+
+.btn-save:active {
+  transform: translateY(0px);
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
+}
+
+.btn-save:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+/* =========================================================
+   📱 RESPONSIVE
+   ========================================================= */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .header-title {
+    font-size: 24px;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+/* =========================================================
+   ⚠️ SAFE OVERRIDE RULE
+   ========================================================= */

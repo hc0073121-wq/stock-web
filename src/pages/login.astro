@@ -1,0 +1,12 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import LoginForm from "../components/LoginForm.jsx";
+---
+
+<MainLayout>
+  <div class="auth-page">
+    <h2 class="auth-title">로그인</h2>
+
+    <LoginForm client:load />
+  </div>
+</MainLayout>
